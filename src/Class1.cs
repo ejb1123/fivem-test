@@ -18,15 +18,22 @@ namespace test
             //Function.Call(Hash.TERMINATE_ALL_SCRIPTS_WITH_THIS_NAME, Game.GenerateHash("stats_controller"));
         }
 
-        private void Target(int i, int i1)
+        private void Target(int netId, int playerID)
         {
-            //if (i1 == LocalPlayer.ServerId) return;
+            if (playerID == LocalPlayer.ServerId) return;
             Debug.WriteLine("target hit");
-            Doteleoprt(i.ToString());
+            Doteleoprt(netId.ToString());
         }
 
         private async Task OnTick()
         {
+            if (Game.IsControlJustPressed(0,Control.Cover) && LocalPlayer.Character.IsInVehicle())
+            {
+                Game.DisableControlThisFrame(0, Control.VehicleRadioWheel);
+                RequestWarp(Game.PlayerPed.CurrentVehicle);
+                var netidd = Function.Call<int>(Hash.NETWORK_GET_NETWORK_ID_FROM_ENTITY, LocalPlayer.Character.CurrentVehicle.Handle);
+                Screen.ShowNotification($"Tell the other user to use the \"Z\" key and to enter \"{netidd}\"");
+            }
             if (Game.IsControlJustPressed(0, Control.SelectWeaponUnarmed))
             {
                 Game.DisableControlThisFrame(0,Control.SelectWeaponUnarmed);
@@ -68,10 +75,10 @@ namespace test
                 LocalPlayer.Character.Position.Y,
                 LocalPlayer.Character.Position.Z,
                 LocalPlayer.Character.Heading,
-                false,
-                false));
+                one,
+                two));
             //veh.MarkAsNoLongerNeeded();
-            //k.MarkAsNoLongerNeeded();
+            k.MarkAsNoLongerNeeded();
 
             LocalPlayer.Character.SetIntoVehicle(veh, VehicleSeat.Driver);
             veh.RegisterAsNetworked();

@@ -7,4 +7,3 @@ C:\Users\ejbev\Documents\test\src\obj\Debug\test.net.dll
 C:\Users\ejbev\Documents\test\src\obj\Debug\test.net.pdb
 C:\Users\ejbev\Documents\test\src\bin\Debug\__resource.lua
 C:\Users\ejbev\Documents\test\src\bin\Debug\server.lua
-C:\Users\ejbev\Documents\test\src\obj\Debug\test.csprojResolveAssemblyReference.cache
