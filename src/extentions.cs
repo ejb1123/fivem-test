@@ -8,7 +8,7 @@ namespace test
     {
         public static Int64 GetNetworkId(this Entity entity)
         {
-            return Function.Call<Int64>(Hash.NETWORK_GET_NETWORK_ID_FROM_ENTITY, entity.Handle);
+            return Function.Call<Int64>(Hash.VEH_TO_NET, entity.Handle);
         }
 
         public static void RegisterAsNetworked(this Entity entity)

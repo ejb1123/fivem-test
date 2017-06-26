@@ -30,8 +30,8 @@ namespace test
             if (Game.IsControlJustPressed(0,Control.Cover) && LocalPlayer.Character.IsInVehicle())
             {
                 Game.DisableControlThisFrame(0, Control.VehicleRadioWheel);
-                RequestWarp(Game.PlayerPed.CurrentVehicle);
-                var netidd = Function.Call<int>(Hash.NETWORK_GET_NETWORK_ID_FROM_ENTITY, LocalPlayer.Character.CurrentVehicle.Handle);
+                //RequestWarp(Game.PlayerPed.CurrentVehicle);
+               var netidd =  LocalPlayer.Character.CurrentVehicle.GetNetworkId();
                 Screen.ShowNotification($"Tell the other user to use the \"Z\" key and to enter \"{netidd}\"");
             }
             if (Game.IsControlJustPressed(0, Control.SelectWeaponUnarmed))
