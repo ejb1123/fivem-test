@@ -3,6 +3,6 @@ server:
   url: 127.0.0.1:30120
   password: lovely
   src: .
-  root: C:\Users\ejbev\Desktop\cfx-server
+  root: C:\Users\ejb11\Documents\server-data
   name: test
   iceconpath: icecon.exe

@@ -20,6 +20,7 @@ namespace test
 
         private void Target(int netId, int playerID)
         {
+            Debug.WriteLine($"yea {this.Players[playerID].Character.CurrentVehicle.GetNetworkId()}");
             if (playerID == LocalPlayer.ServerId) return;
             Debug.WriteLine("target hit");
             Doteleoprt(netId.ToString());
@@ -61,6 +62,7 @@ namespace test
             Screen.ShowNotification($"Running {one},{two} test.");
             if (LocalPlayer.Character.IsInVehicle())
             {
+                await CitizenFX.Core.BaseScript.Delay(10000);
                 RequestWarp(Game.PlayerPed.CurrentVehicle);
                 var netidd = Function.Call<int>(Hash.NETWORK_GET_NETWORK_ID_FROM_ENTITY, LocalPlayer.Character.CurrentVehicle.Handle);
                 Screen.ShowNotification($"Tell the other user to use the \"Z\" key and to enter \"{netidd}\"");
@@ -81,9 +83,16 @@ namespace test
             k.MarkAsNoLongerNeeded();
 
             LocalPlayer.Character.SetIntoVehicle(veh, VehicleSeat.Driver);
+
             veh.RegisterAsNetworked();
-            var netid = veh.GetNetworkId();
+            Screen.ShowNotification($"network status {Function.Call<bool>(Hash.NETWORK_GET_ENTITY_IS_NETWORKED, veh)}");
+
             veh.SetExistOnAllMachines(true);
+
+            await CitizenFX.Core.BaseScript.Delay(10000);
+            var netid = veh.GetNetworkId();
+            await CitizenFX.Core.BaseScript.Delay(10000);
+            Screen.ShowNotification($"network status {Function.Call<bool>(Hash.NETWORK_GET_ENTITY_IS_NETWORKED, veh)}");
             RequestWarp(veh);
             Screen.ShowNotification($"Tell the other user to use the \"Z\" key and to enter \"{netid}\"");
         }
